@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: SNSProject
+  config:
+    import: security-variable.yml
+  thymeleaf:
+    cache: false
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/snsproject?serverTimezone=Asia/Seoul
+    username: root
+    password: ${mysql.password}
