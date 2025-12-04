@@ -1,0 +1,37 @@
+#wrap{
+    width:1200px;
+    height:900px;
+    margin: 0 auto;
+}
+
+
+.main-logo-image{
+    height:500px;
+    width:600px;
+}
+
+.content{
+    height:500px;
+    width:600px;
+}
+
+.content> .user-box{
+    width:400px;
+}
+
+.user-box > .title{
+    height:120px;
+}
+.title > .main-title{
+    font-size:36px;
+    font-weight:650;
+}
+
+.user-box > .btn{
+    background-color:rgb(232,222,248);
+}
+
+.user-box > .join-part{
+    border-radius:15px;
+    background-color:#ffffff;
+}
