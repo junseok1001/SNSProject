@@ -34,11 +34,11 @@
             </div>
 
             <div class="d-flex justify-content-center my-3">
-                <input type="password" id="phoneNumberInput" class="form-control form-control-lg col-7 mx-3 " placeholder="전화번호">
+                <input type="text" id="phoneNumberInput" class="form-control form-control-lg col-7 mx-3 " placeholder="전화번호">
             </div>
 
             <div class="d-flex justify-content-center my-3">
-                <input type="password" id="emailInput" class="form-control form-control-lg col-7 mx-3 " placeholder="이메일">
+                <input type="text" id="emailInput" class="form-control form-control-lg col-7 mx-3 " placeholder="이메일">
             </div>
 
             <div class="d-flex justify-content-center my-3">
@@ -47,6 +47,65 @@
         </div>
     </div>
 </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $("#joinBtn").on("click", function(){
+            let id = $("#loginIdInput").val();
+            let password = $("#passwordInput").val();
+            let confirmPassword = $("#confirmPasswordInput").val();
+            let phoneNumber = $("#phoneNumberInput").val();
+            let email = $("#emailInput").val();
 
+
+            if(id == ""){
+                alert("아이디를 입력하세요;")
+                return;
+            }
+
+            if(password == ""){
+                alert("비밀번호를 입력하세요.")
+                return;
+            }
+
+            if(password != confirmPassword){
+                alert("비밀번호가 일치하지 않습니다.");
+                return;
+            }
+
+            if(phoneNumber == ""){
+                alert("전화번호를 입력하세요");
+                return;
+            }
+
+            if(email == ""){
+                alert("이메일을 입력하세요");
+                return;
+            }
+
+
+            $.ajax({
+                type:"post"
+                , url:"/user/join-process"
+                , data:{"loginId":id, "password": password, "phoneNumber": phoneNumber, "email":email}
+                , success:function(response){
+                    if(response.result == "success"){
+                        location.href="/user/login";
+                    }else{
+                        alert("회원가입 실패!");
+                    }
+
+                }
+                , error: function(){
+                    alert("회원가입 에러!!");
+                }
+            });
+
+
+
+
+        });
+
+
+    </script>
 </body>
 </html>
