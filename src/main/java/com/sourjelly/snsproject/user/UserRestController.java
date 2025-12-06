@@ -28,14 +28,12 @@ public class UserRestController {
 
 
         Map<String, String> result = new HashMap<>();
-        if(userService.createUser(loginId,password,phoneNumber,email)){
+        if(userService.createUser(loginId, password, phoneNumber, email)){
             result.put("result", "success");
         }else{
             result.put("result", "fail");
         }
-
         return result;
-
     }
 
 

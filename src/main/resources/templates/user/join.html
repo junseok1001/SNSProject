@@ -49,6 +49,20 @@
 </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
+        $("#confirmBtn").on("click",function(){
+            let id = $("#loginIdInput").val();
+
+            if(id == ""){
+                alert("아이디를 입력하세요;")
+                return;
+            }
+
+            $.ajax({
+
+            });
+
+        });
+
         $("#joinBtn").on("click", function(){
             let id = $("#loginIdInput").val();
             let password = $("#passwordInput").val();
@@ -82,7 +96,6 @@
                 return;
             }
 
-
             $.ajax({
                 type:"post"
                 , url:"/user/join-process"
@@ -99,8 +112,6 @@
                     alert("회원가입 에러!!");
                 }
             });
-
-
 
 
         });
