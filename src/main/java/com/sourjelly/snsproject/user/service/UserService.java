@@ -28,8 +28,11 @@ public class UserService {
     }
 
 
-    // 아이디 중복
-//    public boolean isDuplicateId(String loginId){
-//
-//    }
+//     아이디 중복
+    public boolean isDuplicateId(String loginId){
+
+        int count = userRepository.isDupulicateId(loginId);
+
+        return count == 1;
+    }
 }

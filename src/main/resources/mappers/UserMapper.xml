@@ -23,4 +23,14 @@
 
     </insert>
 
+    <select id="isDupulicateId" parameterType="string"
+    resultType="int">
+            SELECT
+                COUNT(*)
+            FROM
+                `user`
+            WHERE
+                `login_id`= #{loginId}
+    </select>
+
 </mapper>

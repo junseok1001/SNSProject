@@ -13,6 +13,8 @@ public interface UserRepository {
             , @Param("email") String email
     );
 
+    public int isDupulicateId(@Param("loginId") String loginId);
+
 
 
 }

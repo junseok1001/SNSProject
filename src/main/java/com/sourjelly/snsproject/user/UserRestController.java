@@ -40,8 +40,18 @@ public class UserRestController {
 
 
     // 중복 확인
-//    @GetMapping("duplicate-id")
-//    public Map<String, Boolean> isDuplicate(@RequestParam String loginId){
-//
-//    }
+    @GetMapping("duplicate-id")
+    public Map<String, Boolean> isDuplicate(@RequestParam String loginId){
+
+
+        Map<String, Boolean> result = new HashMap<>();
+        if(userService.isDuplicateId(loginId)){
+            result.put("isDuplicate", true);
+        }else{
+            result.put("isDuplicate", false);
+        }
+
+
+        return result;
+    }
 }

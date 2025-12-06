@@ -10,7 +10,7 @@
 <body>
 
 <div id="wrap" class="d-flex align-items-center">
-    <div class="content bg-secondary ">
+    <div class="content ">
         <div class="main-content">
             <div class="d-flex justify-content-center my-3">
                 <img class="center" width="150" height="120" src="https://cdn.pixabay.com/photo/2013/03/15/09/13/candies-93988_640.jpg">
@@ -21,9 +21,16 @@
             </div>
 
             <div class="d-flex justify-content-center my-3">
-                <input type="text" id="loginIdInput" class="form-control form-control-lg col-5 mx-1" placeholder="아이디">
+                <input type="text" id="loginIdInput" class="form-control form-control-lg col-5 mx-1" placeholder="아이디" name="loginId" data-duplicate=false>
                 <button id="confirmBtn" class="btn btn-lg col-2 ">중복확인</button>
             </div>
+            <div class="d-flex justify-content-center ">
+                <div id="isDuplicate" class="text-small text-danger d-none">중복된 ID 입니다</div>
+            </div>
+            <div class="d-flex justify-content-center ">
+                <div id="isAvailable" class="text-success text-small d-none">사용가능한 ID 입니다.</div>
+            </div>
+
 
             <div class="d-flex justify-content-center my-3">
                 <input type="password" id="passwordInput" class="form-control form-control-lg col-7 mx-3 " placeholder="비밀번호">
@@ -50,7 +57,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         $("#confirmBtn").on("click",function(){
-            let id = $("#loginIdInput").val();
+            var id = $("#loginIdInput").val();
 
             if(id == ""){
                 alert("아이디를 입력하세요;")
@@ -58,18 +65,38 @@
             }
 
             $.ajax({
+                type:"get"
+                , url:"/user/duplicate-id"
+                , data:{"loginId": id}
+                , success:function(response){
 
+                    if(response.isDuplicate){
+                        $("#isDuplicate").removeClass("d-none");
+                        $("#isAvailable").addClass("d-none");
+                        $("input[name='loginId']").data("duplicate", false);
+                    }else{
+                        $("#isAvailable").removeClass("d-none");
+                        $("#isDuplicate").addClass("d-none");
+                        $("input[name='loginId']").data("duplicate", true);
+                    }
+                }
+                ,error:function(){
+                    alert("중복 에러!!");
+                }
             });
 
         });
 
         $("#joinBtn").on("click", function(){
-            let id = $("#loginIdInput").val();
-            let password = $("#passwordInput").val();
-            let confirmPassword = $("#confirmPasswordInput").val();
-            let phoneNumber = $("#phoneNumberInput").val();
-            let email = $("#emailInput").val();
+            var id = $("#loginIdInput").val();
+            var password = $("#passwordInput").val();
+            var confirmPassword = $("#confirmPasswordInput").val();
+            var phoneNumber = $("#phoneNumberInput").val();
+            var email = $("#emailInput").val();
 
+            let isVailable = $("input[name='loginId']").data("duplicate");
+
+            console.log(isVailable);
 
             if(id == ""){
                 alert("아이디를 입력하세요;")
