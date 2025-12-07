@@ -1,23 +1,18 @@
 package com.sourjelly.snsproject.user;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/user")
+@RequestMapping("/main")
 @Controller
-public class UserController {
+public class MainController {
 
 
-    @GetMapping("/login")
-    public String login(){
-        return "user/login";
+    @GetMapping("/list")
+    public String list(){
+        return "main/list";
     }
-
-    @GetMapping("/join")
-    public String join(){
-        return "user/join";
-    }
-
 
 }

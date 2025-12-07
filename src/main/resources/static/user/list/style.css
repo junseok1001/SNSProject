@@ -1,0 +1,52 @@
+#wrap{
+    width:1200px;
+    margin: 0 auto;
+}
+
+
+header{
+    height:100px;
+    background-color:#dddddd;
+}
+
+
+.contents{
+    width:1000px;
+    height:772px;
+    margin: 0 auto;
+    background-color:#dddddd;
+}
+
+.user-box{
+    width:760px;
+    height: 800px;
+    margin: 0 auto;
+    border-radius:30px;
+    background-color:#fffefe;
+}
+
+.profile-info{
+    height:50px;
+}
+
+.search-input-form{
+    border-radius:30px;
+}
+.search-button{
+    position:absolute;
+    border-radius:30px;
+}
+
+
+
+.time-line-image{
+    border-radius:30px;
+}
+
+
+
+
+footer{
+    height:80px;
+    background-color:#dddddd;
+}
