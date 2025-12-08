@@ -1,4 +1,4 @@
-package com.sourjelly.snsproject.user;
+package com.sourjelly.snsproject.main;
 
 
 import org.springframework.stereotype.Controller;
