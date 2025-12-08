@@ -1,5 +1,6 @@
 package com.sourjelly.snsproject.user.repository;
 
+import com.sourjelly.snsproject.user.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,6 +15,8 @@ public interface UserRepository {
     );
 
     public int isDupulicateId(@Param("loginId") String loginId);
+
+    public User selectUser(@Param("loginId") String loginId, @Param("password") String password);
 
 
 

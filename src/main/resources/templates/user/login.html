@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="/user/login/css/style.css">
 </head>
 <body>
-<!--로고 이미지 https://cdn.pixabay.com/photo/2013/03/15/09/13/candies-93988_640.jpg-->
+<!--로고 이미지 https://cdn.pixabay.com/photo/2017/04/04/12/12/jelly-beans-2201219_640.jpg-->
 
 
 <div id="wrap" class="d-flex align-items-center">
     <article class="main-logo-image ">
-        <img class="mx-3" src="https://cdn.pixabay.com/photo/2013/03/15/09/13/candies-93988_640.jpg">
+        <img class="mx-3" src="https://cdn.pixabay.com/photo/2016/07/13/09/43/gummy-bears-1514016_640.png">
     </article>
     <section class="content d-flex justify-content-center align-items-center">
         <div class="user-box ">
@@ -21,11 +21,11 @@
                 <span class="main-title">sourJellyGram</span><br>
                 sourjelly에 오신걸 환영합니다
             </div>
-            <input type="text" class="id-input form-control my-2 " placeholder="아이디" >
-            <input type="text" class="password-input form-control my-2 " placeholder="비밀번호">
-            <button type="button" class="btn btn-block my-2">로그인</button>
+            <input id="loginIdInput" type="text" class="id-input form-control my-2 " placeholder="아이디" >
+            <input id="passwordInput" type="password" class="password-input form-control my-2 " placeholder="비밀번호">
+            <button id="loginBtn" type="button" class="btn btn-block my-2">로그인</button>
             <div class="join-part d-flex justify-content-center">
-            <div>회원이 아니신가요?</div><a href="#">가입하기</a>
+            <div class="mr-1">회원이 아니신가요?</div> <a href="/user/join"> 가입하기</a>
             </div>
         </div>
 
@@ -33,5 +33,38 @@
 
 </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $("#loginBtn").on("click",function(){
+            let id = $("#loginIdInput").val();
+            let password = $("#passwordInput").val();
+
+            if(id == ""){
+                alert("아이디를 입력하세요");
+                return;
+            }
+
+            if(password == ""){
+                alert("비밀번호를 입력하세요");
+                return;
+            }
+
+            $.ajax({
+                type:"post"
+                , url:"/user/login-process"
+                , data:{"loginId":id, "password":password}
+                , success:function(response){
+                    if(response.result == "success"){
+                        location.href="/main/list"
+                    }else{
+                        alert("로그인 실패!!");
+                    }
+                }
+                , error:function(){
+                    alert("로그인 에러!!");
+                }
+            });
+        });
+    </script>
 </body>
 </html>

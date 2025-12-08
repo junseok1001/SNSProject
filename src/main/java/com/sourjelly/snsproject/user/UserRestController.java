@@ -1,6 +1,9 @@
 package com.sourjelly.snsproject.user;
 
+import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -14,6 +17,28 @@ public class UserRestController {
 
     public UserRestController(UserService userService){
         this.userService = userService;
+    }
+
+    //로그인
+    @PostMapping("/login-process")
+    public Map<String, String> login(
+            @RequestParam String loginId
+            , @RequestParam String password
+            , HttpServletRequest request){
+
+        User user = userService.getUser(loginId, password);
+
+        Map<String, String> result = new HashMap<>();
+        if(user != null){
+            result.put("result", "success");
+            HttpSession session = request.getSession();
+
+            session.setAttribute("user", user);
+        }else{
+            result.put("result", "fail");
+        }
+
+        return result;
     }
 
 

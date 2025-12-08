@@ -1,6 +1,7 @@
 package com.sourjelly.snsproject.user.service;
 
 import com.sourjelly.snsproject.common.SHA256HashingEncoder;
+import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,15 @@ public class UserService {
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
+    public User getUser(String loginId, String password){
+
+        String encodePassword = SHA256HashingEncoder.encode(password);
+
+        User user = userRepository.selectUser(loginId, encodePassword);
+
+        return user;
+    }
+
 
     //회원가입
     public boolean createUser(
