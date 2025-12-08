@@ -56,8 +56,16 @@
 </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
+        var isDuplicateCheck = false;
+
+        $("#loginIdInput").on("input", function(){
+
+            $("#isAvailable").addClass("d-none");
+            $("#isDuplicate").addClass("d-none");
+        });
+
         $("#confirmBtn").on("click",function(){
-            var id = $("#loginIdInput").val();
+            let id = $("#loginIdInput").val();
 
             if(id == ""){
                 alert("아이디를 입력하세요;")
@@ -69,6 +77,7 @@
                 , url:"/user/duplicate-id"
                 , data:{"loginId": id}
                 , success:function(response){
+                    isDuplicateCheck = true;
 
                     if(response.isDuplicate){
                         $("#isDuplicate").removeClass("d-none");
@@ -88,11 +97,11 @@
         });
 
         $("#joinBtn").on("click", function(){
-            var id = $("#loginIdInput").val();
-            var password = $("#passwordInput").val();
-            var confirmPassword = $("#confirmPasswordInput").val();
-            var phoneNumber = $("#phoneNumberInput").val();
-            var email = $("#emailInput").val();
+            let id = $("#loginIdInput").val();
+            let password = $("#passwordInput").val();
+            let confirmPassword = $("#confirmPasswordInput").val();
+            let phoneNumber = $("#phoneNumberInput").val();
+            let email = $("#emailInput").val();
 
             let isVailable = $("input[name='loginId']").data("duplicate");
 
@@ -103,8 +112,15 @@
                 return;
             }
 
-            if(isVailable == false){
+            // 중복 체크아 안됐을 경우
+            if(!isDuplicateCheck){
                 alert("중복확인을 해주세요");
+                return;
+            }
+
+            //id 가 중복일 경우
+            if(isVailable == false){
+                alert("ID가 중복되었습니다.");
                 return;
             }
 
