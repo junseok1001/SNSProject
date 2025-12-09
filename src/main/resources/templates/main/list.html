@@ -10,7 +10,7 @@
             <!--상단-->
             <div class="profile-info w-100 d-flex align-items-center justify-content-between ml-4 mt-3">
                 <div class="d-flex">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABiUlEQVR4nO2VyUoDQRRFjxtFjKLg8Am6FUGXahBXookD/oYERWJWmpXDQn9C3KnxM8Rhq0jwA+IURYgalYIbKIJJm+5qUOgLb9FV9937uvq9aogQ4R+iF8gCF8CL4hzYAHrCNp8HisBXjXgCZsM0/5TRITAKtCnGgCPtlYFkGMdelMFKHd6qOI9At8sCstabeyEn7rrLAi4lao7dC+PimsZ0hmeJxn7BbRfXfDJneGiggA5x710WcCZR0+1eiIt76rKAjETNqHnhRNy0ywL6gDsJm1GrhbQ4BY2uUySBDxnk1O0xRdx6c8NJEBLmdNPVuorL4oSCaeCmjnklDGfKpXETsF1lcgv0A62KAa1V9s0/Y1O5gbEj0XdgzWrGXTWniT2r+TLimuetoOYJCb0BE1ozv9vSD0dfsppvUjlmfcaveYt1rKmqvRFNQkFxDAxXcZaVmwea/RSwKIErn9/S5FxLY8FPAQdKXsI/UtLY95OcV/JggAKGrNFsGK9K7gxQQJc0jFaECH8T3w4tiRjN0FBRAAAAAElFTkSuQmCC" alt="user">
+                    <i class="bi bi-person-circle h1"></i>
                 <div>user-name</div>
                 </div>
                 <div class="search-box d-flex w-100 ml-3">
@@ -22,16 +22,47 @@
             </div>
 
             <!--중단 이미지-->
-            <div class="d-flex justify-content-center">
+            <div class="image-area d-flex justify-content-center">
                 <img class="time-line-image" width="700" height="450" src="https://cdn.pixabay.com/photo/2017/09/04/18/39/coffee-2714970_640.jpg">
             </div>
 
-            <!--  -->
-            <div>
-                
+            <!-- 하트랑 목록-->
+            <div class="heart-list-area d-flex justify-content-between">
+                <div class="d-flex align-items-center ml-4">
+                    <button type="button" class="btn p-1"><i class="bi bi-heart-fill hover text-danger"></i></button>
+                    <div class="font-weight-bold">좋아요 갯수 : <span>5</span></div>
+                </div>
+
+
+                <div class="dropdown mr-4">
+                    <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical h2"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">삭제하기</a>
+                        <a class="dropdown-item" href="#">게시물로 이동</a>
+                        <a class="dropdown-item" href="#">취소</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hastag-area ml-4">
+                #오늘의 커피한잔. #따뜻한거 먹자 #카페인 중독
+            </div>
+
+            <div class="comment-area ml-4">
+                <div class="d-flex align-items-top">
+                    <i class="bi bi-person-circle h4"></i>
+                    <div>user-name</div>
+                </div>
+                <div class="comment-box "><p class="ml-3 text-wrap">분위가가 좋네요</p></div>
             </div>
 
         </div>
     </section>
+
+<script layout:fragment="script">
+
+</script>
 
 </html>

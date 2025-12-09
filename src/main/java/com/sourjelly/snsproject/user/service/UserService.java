@@ -27,12 +27,13 @@ public class UserService {
     public boolean createUser(
             String loginId
             , String password
+            , String name
             , String phoneNumber
             , String email
     ){
         String encodingPassword = SHA256HashingEncoder.encode(password);
 
-        int count = userRepository.insertUser(loginId, encodingPassword, phoneNumber, email);
+        int count = userRepository.insertUser(loginId, encodingPassword, name ,phoneNumber, email);
 
         return count ==1;
     }

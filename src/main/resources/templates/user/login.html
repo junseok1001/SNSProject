@@ -21,9 +21,11 @@
                 <span class="main-title">sourJellyGram</span><br>
                 sourjelly에 오신걸 환영합니다
             </div>
-            <input id="loginIdInput" type="text" class="id-input form-control my-2 " placeholder="아이디" >
-            <input id="passwordInput" type="password" class="password-input form-control my-2 " placeholder="비밀번호">
-            <button id="loginBtn" type="button" class="btn btn-block my-2">로그인</button>
+            <form id="loginForm">
+                <input id="loginIdInput" type="text" class="id-input form-control my-2 " placeholder="아이디" >
+                <input id="passwordInput" type="password" class="password-input form-control my-2 " placeholder="비밀번호">
+                <button id="submit" type="button" class="btn btn-block my-2">로그인</button>
+            </form>
             <div class="join-part d-flex justify-content-center">
             <div class="mr-1">회원이 아니신가요?</div> <a href="/user/join"> 가입하기</a>
             </div>
@@ -35,7 +37,11 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-        $("#loginBtn").on("click",function(){
+        $("#loginForm").on("submit",function(e){
+            // form 태그 submit 이벤트가 가지는 요청 기능을 취소
+            // 해당 이벤트에 포함된 모든 기능 취소
+            e.preventDefault();
+
             let id = $("#loginIdInput").val();
             let password = $("#passwordInput").val();
 
@@ -65,6 +71,7 @@
                 }
             });
         });
+        
     </script>
 </body>
 </html>

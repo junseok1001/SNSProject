@@ -24,6 +24,12 @@ header{
     border-radius:30px;
     background-color:#fffefe;
 }
+.comment-box{
+    width:490px;
+    height:35px;
+    border-radius:30px;
+    background-color:#dddddd;
+}
 
 .profile-info{
     height:50px;
@@ -44,6 +50,9 @@ header{
 }
 
 
+.post-title{
+    font-size:15px;
+}
 
 
 footer{

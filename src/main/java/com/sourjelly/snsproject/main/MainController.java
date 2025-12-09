@@ -11,7 +11,7 @@ public class MainController {
 
 
     @GetMapping("/list")
-    public String list(){
+    public String timeline(){
         return "main/list";
     }
 

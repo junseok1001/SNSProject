@@ -25,7 +25,7 @@ input::placeholder{
 
 #loginIdInput, #passwordInput
 , #confirmPasswordInput, #phoneNumberInput
-, #emailInput{
+, #emailInput, #nameInput{
     background-color:#F5F5F5;
 }
 

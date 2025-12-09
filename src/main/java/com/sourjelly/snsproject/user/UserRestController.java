@@ -24,14 +24,13 @@ public class UserRestController {
     public Map<String, String> login(
             @RequestParam String loginId
             , @RequestParam String password
-            , HttpServletRequest request){
+            , HttpSession session){
 
         User user = userService.getUser(loginId, password);
 
         Map<String, String> result = new HashMap<>();
         if(user != null){
             result.put("result", "success");
-            HttpSession session = request.getSession();
 
             session.setAttribute("user", user);
         }else{
@@ -47,13 +46,14 @@ public class UserRestController {
     public Map<String, String> join(
             @RequestParam String loginId
             , @RequestParam String password
+            , @RequestParam String name
             , @RequestParam String phoneNumber
             , @RequestParam String email
     ){
 
 
         Map<String, String> result = new HashMap<>();
-        if(userService.createUser(loginId, password, phoneNumber, email)){
+        if(userService.createUser(loginId, password, name ,phoneNumber, email)){
             result.put("result", "success");
         }else{
             result.put("result", "fail");

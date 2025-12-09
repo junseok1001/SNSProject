@@ -27,7 +27,7 @@
     font-weight:650;
 }
 
-.user-box > .btn{
+#loginForm > .btn{
     background-color:rgb(232,222,248);
 }
 

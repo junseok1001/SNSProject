@@ -41,6 +41,10 @@
             </div>
 
             <div class="d-flex justify-content-center my-3">
+                <input type="text" id="nameInput" class="form-control form-control-lg col-7 mx-3 " placeholder="이름">
+            </div>
+
+            <div class="d-flex justify-content-center my-3">
                 <input type="text" id="phoneNumberInput" class="form-control form-control-lg col-7 mx-3 " placeholder="전화번호">
             </div>
 
@@ -98,6 +102,7 @@
 
         $("#joinBtn").on("click", function(){
             let id = $("#loginIdInput").val();
+            let name = $("#nameInput").val();
             let password = $("#passwordInput").val();
             let confirmPassword = $("#confirmPasswordInput").val();
             let phoneNumber = $("#phoneNumberInput").val();
@@ -124,6 +129,11 @@
                 return;
             }
 
+            if(name == ""){
+                alert("이름을 입력하세요.")
+                return;
+            }
+
             if(password == ""){
                 alert("비밀번호를 입력하세요.")
                 return;
@@ -147,7 +157,7 @@
             $.ajax({
                 type:"post"
                 , url:"/user/join-process"
-                , data:{"loginId":id, "password": password, "phoneNumber": phoneNumber, "email":email}
+                , data:{"loginId":id, "password": password, "name":name ,"phoneNumber": phoneNumber, "email":email}
                 , success:function(response){
                     if(response.result == "success"){
                         location.href="/user/login";
