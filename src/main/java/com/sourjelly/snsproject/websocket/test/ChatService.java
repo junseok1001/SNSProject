@@ -15,7 +15,8 @@ import java.util.*;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class ChatService {private final ObjectMapper objectMapper;
+public class ChatService {
+    private final ObjectMapper objectMapper;
     private Map<String, ChatRoom> chatRooms;
     //roomId를 key로 가지고 chatRoom을 value로 가짐
 
