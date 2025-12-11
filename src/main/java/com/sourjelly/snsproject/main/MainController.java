@@ -15,4 +15,9 @@ public class MainController {
         return "main/list";
     }
 
+    @GetMapping("/add")
+    public String formInput(){
+        return "main/form";
+    }
+
 }
