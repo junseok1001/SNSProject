@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class FileManger {
 
-    public final static String FILE_UPLOAD_PATH="D:\\jun_project\\springProject\\upload\\snsproject";
+    public final static String FILE_UPLOAD_PATH="D:\\webInventer\\springProject\\upload\\snsproject";
 
     public static String saveFile(long userId, MultipartFile file){
 

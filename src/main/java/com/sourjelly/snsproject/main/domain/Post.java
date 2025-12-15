@@ -30,6 +30,4 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private User user;
 }
