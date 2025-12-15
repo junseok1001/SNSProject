@@ -46,4 +46,8 @@ public class UserService {
 
         return count == 1;
     }
+    // post에서 쓸 사용자의 정보 가져오기
+    public User getUserById(long id){
+        return userRepository.selectUserById(id);
+    }
 }

@@ -22,7 +22,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private long id;
     private String loginId;
     private String password;
@@ -34,8 +33,8 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "user")
-    private List<Post> post = new ArrayList<>();
+//    @OneToMany(mappedBy = "user")
+//    private List<Post> post = new ArrayList<>();
 
 
     // 내가 생각한 방법 fetch join 임 그리고 fech join은 jpa n+1 문제를 해결함. 근데 n+1이 정확히 어떤 문제지를 모르겠음
