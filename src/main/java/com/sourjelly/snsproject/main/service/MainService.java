@@ -7,6 +7,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class MainService {
 
@@ -40,6 +43,16 @@ public class MainService {
 
         return true;
     }
+
+
+    // 게시물 전체정보 가져오기
+    public List<Post> PostList(
+
+        
+
+
+    }
+
 
 
 }

@@ -19,7 +19,16 @@
             <img class="ml-3" width="100" height="75" alt="sourJellyGramLogo" src="https://cdn.pixabay.com/photo/2016/07/13/09/43/gummy-bears-1514016_640.png">
             <div>SourJellyGram</div>
         </div>
-        <div th:if="${session.user != null}" class="mr-3"><span th:text="${session.user.getName()}" class="mr-2" >유재석</span><a class="font-weight-bold" href="/user/logout">로그아웃</a></div>
+        <div th:if="${session.user != null}" class="dropdown mr-4">
+            <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle h1"></i>
+            </button>
+            <div class="dropdown-menu text-center">
+                <div class="mr-3"><span th:text="${session.user.getName()}" class="mr-2" >유재석</span></div>
+                <a class="font-weight-bold" href="/user/logout">로그아웃</a>
+                <a class="dropdown-item" href="/main/add">게시물 작성하기</a>
+            </div>
+        </div>
     </header>
     <th:block layout:fragment="contents">
 

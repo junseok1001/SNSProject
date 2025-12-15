@@ -24,7 +24,7 @@ public class FileManger {
 
         String directoryPath = FILE_UPLOAD_PATH + directoryName;
 
-        File directory = new File(directoryName);
+        File directory = new File(directoryPath);
 
         if(!directory.mkdir()){
             //디렉토리 생성 실패

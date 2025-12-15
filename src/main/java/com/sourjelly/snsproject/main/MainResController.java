@@ -4,10 +4,8 @@ package com.sourjelly.snsproject.main;
 import com.sourjelly.snsproject.main.service.MainService;
 import com.sourjelly.snsproject.user.domain.User;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -27,7 +25,7 @@ public class MainResController {
     public Map<String, String> addPost(
             @RequestParam String title
             , @RequestParam String contents
-            , @RequestParam(required = false) MultipartFile imageFile
+            , @RequestParam MultipartFile imageFile
             , HttpSession session){
 
         User user = (User)session.getAttribute("user");
@@ -42,6 +40,12 @@ public class MainResController {
         }
 
         return resultMap;
+
+    }
+
+    @PostMapping("/modify")
+    public Map<String, Boolean> modifyContents(){
+
 
 
     }

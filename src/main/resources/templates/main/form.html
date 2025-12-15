@@ -14,18 +14,21 @@
             <textarea id="contentInput" class="form-control" rows="20" cols="128"> </textarea>
             <input id="fileInput" class="form-control mt-3" type="file">
             <div class="d-flex justify-content-end mt-3">
-                <button id="formInput" class="btn btn-success" type="button">작성하기</button>
-                <a class="btn btn-danger" href="#" type="">취소</a>
+                <button id="formInput" class="btn btn-success mr-2" type="button">작성하기</button>
+                <a class="btn btn-danger" href="/main/list" type="">취소</a>
             </div>
         </div>
     </section>
 
 
 <script layout:fragment="script">
+
+
     $("#formInput").on("click", function(){
         let title = $("#titleInput").val();
-        let content = $("contentInput").val();
+        let content = $("#contentInput").val();
         let file = $("#fileInput")[0].files[0];
+
 
         if(title==""){
             alert("제목을 입력하세요");
@@ -37,12 +40,17 @@
             return;
         }
 
+        if(file == null){
+            alert("이미지를 선택하세요");
+            return;
+        }
+
         let formData = new FormData();
         formData.append("title", title);
-        formData.append("content", content);
+        formData.append("contents", content);
         formData.append("imageFile", file);
 
-        $({
+        $.ajax({
             type:"post"
             , url:"/post/add-process"
             , data: formData
