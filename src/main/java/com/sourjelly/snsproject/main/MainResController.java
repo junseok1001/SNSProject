@@ -20,7 +20,7 @@ public class MainResController {
     public MainResController(MainService mainService){
         this.mainService = mainService;
     }
-
+    // 게시물 저장
     @PostMapping("/add-process")
     public Map<String, String> addPost(
             @RequestParam String title
@@ -40,6 +40,17 @@ public class MainResController {
         }
 
         return resultMap;
+
+    }
+
+    // 댓글저장 저장
+    @GetMapping("/comment-add")
+    public Map<String, String> addComment(
+            @RequestParam String comment
+            , @RequestParam long postId
+            , @RequestParam long userId){
+
+
 
     }
 
