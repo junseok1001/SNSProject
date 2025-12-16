@@ -1,8 +1,11 @@
 package com.sourjelly.snsproject.main.service;
 
 import com.sourjelly.snsproject.common.FileManger;
+import com.sourjelly.snsproject.main.Repository.CommentRepository;
 import com.sourjelly.snsproject.main.Repository.MainRepository;
+import com.sourjelly.snsproject.main.domain.Comment;
 import com.sourjelly.snsproject.main.domain.Post;
+import com.sourjelly.snsproject.main.dto.CommentDto;
 import com.sourjelly.snsproject.main.dto.PostDto;
 import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.service.UserService;
@@ -21,10 +24,11 @@ public class MainService {
     private final MainRepository mainRepository;
 
     private final UserService userService;
-
-    public MainService(MainRepository mainRepository, UserService userService){
+    private final CommentRepository commentRepository;
+    public MainService(MainRepository mainRepository, UserService userService, CommentRepository commentRepository){
         this.mainRepository = mainRepository;
         this.userService = userService;
+        this.commentRepository = commentRepository;
     }
 
     // 게시물 추가부터
@@ -63,6 +67,7 @@ public class MainService {
         for(Post post: postList){
             // post -> postDto로 변환
             // 1 + N 문제 : cache로 극복
+
             User user = userService.getUserById(post.getUserId());
 
             PostDto postDto = PostDto.builder()
@@ -71,6 +76,8 @@ public class MainService {
                     .imagePath(post.getImagePath())
                     .userId(post.getUserId())
                     .name(user.getName())
+                    .commentName()
+                    .comments(commentRepository.findByPostId(post.getId()))
                     .build();
 
             postDtoList.add(postDto);
@@ -79,5 +86,24 @@ public class MainService {
     }
 
     // 댓글 작성
+
+    public boolean createComment(long postId, long userId, String comment){
+
+        Comment com = Comment.builder()
+                .postId(postId)
+                .userId(userId)
+                .comment(comment)
+                .build();
+
+
+        try{
+            commentRepository.save(com);
+        }catch(DataAccessException e){
+            return false;
+        }
+
+        return true;
+
+    }
 
 }

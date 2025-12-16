@@ -54,22 +54,18 @@
                 <hr>
 
                 <!-- 댓글 부분 -->
-                <div class="comment-area ml-4 ">
+                <div th:each="comment : ${post.comments}" class="comment-area ml-4 ">
                     <div class="comment-box d-flex align-items-center ">
-                        <div><b>user-name</b></div>
-                        <p class="ml-3 my-2 text-wrap">분위가가 좋네요</p>
-                    </div>
-                    <div class="comment-box d-flex align-items-center ">
-                        <div><b>user2</b></div>
-                        <p class="ml-3 my-2 text-wrap">위치가 어딘가요?</p>
+                        <div><b th:text="${comment.id}">user-name</b></div>
+                        <p th:text="${comment.comment}" class="ml-3 my-2 text-wrap">분위가가 좋네요</p>
                     </div>
                 </div>
 
                 <!-- /댓글 부분 -->
                 <!-- 댓글 작성 -->
                 <div class="input-group mb-3 container mt-3">
-                    <input type="text" class="form-control" placeholder="댓글을 작성하세요">
-                    <button class="btn btn-info" type="button" id="button-addon2"><i class="bi bi-send"></i></button>
+                    <input id="commentInput" type="text" class="form-control" placeholder="댓글을 작성하세요">
+                    <button th:value="${post.id}" class="sendComment btn btn-info" type="button" ><i class="bi bi-send"></i></button>
                 </div>
 
             </div>
@@ -77,6 +73,28 @@
     </section>
 
 <script layout:fragment="script">
+    $(".sendComment").on("click", function(){
+        let postId = $(this).val();
+        let comment = $("#commentInput").val();
+
+        $.ajax({
+            type:"get"
+            , url:"/post/comment-add"
+            , data:{"postId":postId, "comment":comment}
+            , success: function(response){
+
+                if(response.result == "success"){
+                    location.reload();
+                }else{
+                    alert("댓글 작성 실패!!");
+                }
+
+            }
+            ,error: function(){
+                alert("댓글 작성 에러!");
+            }
+        });
+    });
 
 </script>
 

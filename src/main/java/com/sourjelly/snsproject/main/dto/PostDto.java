@@ -1,8 +1,11 @@
 package com.sourjelly.snsproject.main.dto;
 
 
+import com.sourjelly.snsproject.main.domain.Comment;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -16,5 +19,7 @@ public class PostDto {
     private long userId;
     private String name;
 
-    // comment table
+    // comment
+    private String commentName;
+    private List<Comment> comments;
 }

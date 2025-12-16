@@ -28,6 +28,8 @@ public class MainController {
 
         model.addAttribute("posts", postDtoList);
 
+
+
         return "main/list";
     }
 
