@@ -9,6 +9,7 @@ import com.sourjelly.snsproject.main.domain.Post;
 import com.sourjelly.snsproject.main.dto.PostDto;
 import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -60,9 +61,9 @@ public class MainService {
 
 
 //     게시물 전체정보 가져오기
-    public List<PostDto> PostList(){
+    public List<PostDto> PostList(HttpSession session){
 
-
+        User loginUser = (User)session.getAttribute("user");
         List<Post> postList = mainRepository.findAll(Sort.by("id").descending());
 
         List<PostDto> postDtoList = new ArrayList<>();
@@ -72,6 +73,13 @@ public class MainService {
 
             User user = userService.getUserById(post.getUserId());
             int likeCount = likeService.countByPostId(post.getId());
+
+            List<Comment> comments = commentRepository.findByPostId(post.getId());
+            boolean judge = false;
+            if(likeService.countByUserIdAndPostId(loginUser.getId(), post.getId()) >= 1){
+                judge = true;
+            }
+
             PostDto postDto = PostDto.builder()
                     .id(post.getId())
                     .contents(post.getContents())
@@ -79,6 +87,7 @@ public class MainService {
                     .userId(post.getUserId())
                     .name(user.getName())
                     .likeCount(likeCount)
+                    .isLike(judge)
                     .build();
             postDtoList.add(postDto);
 

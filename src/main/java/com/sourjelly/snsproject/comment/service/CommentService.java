@@ -2,15 +2,10 @@ package com.sourjelly.snsproject.comment.service;
 
 
 import com.sourjelly.snsproject.comment.domain.Comment;
-import com.sourjelly.snsproject.comment.dto.CommentDto;
 import com.sourjelly.snsproject.comment.repository.CommentRepository;
-import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.service.UserService;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class CommentService {

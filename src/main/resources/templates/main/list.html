@@ -29,9 +29,11 @@
 
                 <!-- 하트랑 목록-->
                 <div class="heart-list-area d-flex justify-content-between">
-                    <div class="d-flex align-items-center ml-4">
-                        <i class="unlike-btn bi bi-heart-fill text-danger d-none" th:data-post-id="${post.id}"></i>
-                        <i class="like-btn bi bi-heart" th:data-post-id="${post.id}"></i>
+                    <div class="d-flex align-items-center">
+                        <div th:data-judge-heart="${post.isLike()}" class="heart d-flex align-items-center ml-4" >
+                            <i class="unlike-btn bi bi-heart-fill text-danger" th:data-post-id="${post.id}"></i>
+                            <i class="like-btn bi bi-heart" th:data-post-id="${post.id}" th:data-judge-heart="${post.isLike()}"></i>
+                        </div>
                         <div class="font-weight-bold ml-2">좋아요 <span th:text="${post.likeCount}">5</span></div>
                     </div>
 
@@ -85,6 +87,7 @@
             , success: function(response){
 
                 if(response.result == "success"){
+
                     location.reload();
                 }else{
                     alert("좋아요 실패!!");

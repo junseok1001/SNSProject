@@ -1,11 +1,10 @@
 package com.sourjelly.snsproject.main;
 
 
-import com.sourjelly.snsproject.comment.dto.CommentDto;
 import com.sourjelly.snsproject.comment.service.CommentService;
-import com.sourjelly.snsproject.main.domain.Post;
 import com.sourjelly.snsproject.main.dto.PostDto;
 import com.sourjelly.snsproject.main.service.MainService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +25,11 @@ public class MainController {
     }
 
     @GetMapping("/list")
-    public String timeline(Model model){
+    public String timeline(
+            Model model
+            , HttpSession session){
 
-        List<PostDto> postDtoList = mainService.PostList();
+        List<PostDto> postDtoList = mainService.PostList(session);
 
 
 

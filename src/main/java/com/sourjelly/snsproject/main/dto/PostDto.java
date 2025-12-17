@@ -22,5 +22,4 @@ public class PostDto {
     private int likeCount;
     private boolean isLike;
 
-    private List<Comment> comments;
 }

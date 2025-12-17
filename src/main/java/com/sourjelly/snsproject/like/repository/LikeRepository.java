@@ -11,5 +11,7 @@ public interface LikeRepository extends JpaRepository<Like, LikeId> {
 //    SELECT COUNT(*) FROM `like` WHERE `post_id` = 13;
     public int countByPostId(long postId);
 
+    public int countByUserIdAndPostId(long userId, long postId);
+
 }
 
