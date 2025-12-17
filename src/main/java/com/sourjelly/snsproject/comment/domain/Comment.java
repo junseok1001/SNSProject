@@ -1,4 +1,4 @@
-package com.sourjelly.snsproject.main.domain;
+package com.sourjelly.snsproject.comment.domain;
 
 
 import jakarta.persistence.*;

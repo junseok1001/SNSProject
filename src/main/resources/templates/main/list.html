@@ -30,8 +30,9 @@
                 <!-- 하트랑 목록-->
                 <div class="heart-list-area d-flex justify-content-between">
                     <div class="d-flex align-items-center ml-4">
-                        <button type="button" class="btn p-1"><i class="bi bi-heart-fill hover text-danger"></i></button>
-                        <div class="font-weight-bold">좋아요 <span>5</span></div>
+                        <i class="unlike-btn bi bi-heart-fill text-danger d-none" th:data-post-id="${post.id}"></i>
+                        <i class="like-btn bi bi-heart" th:data-post-id="${post.id}"></i>
+                        <div class="font-weight-bold ml-2">좋아요 <span th:text="${post.likeCount}">5</span></div>
                     </div>
 
 
@@ -54,18 +55,18 @@
                 <hr>
 
                 <!-- 댓글 부분 -->
-                <div th:each="comment : ${post.comments}" class="comment-area ml-4 ">
+                <div   class="comment-area ml-4 ">
                     <div class="comment-box d-flex align-items-center ">
-                        <div><b th:text="${comment.id}">user-name</b></div>
-                        <p th:text="${comment.comment}" class="ml-3 my-2 text-wrap">분위가가 좋네요</p>
+                        <div><b >user-name</b></div>
+                        <p  class="ml-3 my-2 text-wrap">분위가가 좋네요</p>
                     </div>
                 </div>
 
                 <!-- /댓글 부분 -->
                 <!-- 댓글 작성 -->
                 <div class="input-group mb-3 container mt-3">
-                    <input id="commentInput" type="text" class="form-control" placeholder="댓글을 작성하세요">
-                    <button th:value="${post.id}" class="sendComment btn btn-info" type="button" ><i class="bi bi-send"></i></button>
+                    <input  type="text" class="comment-input form-control" placeholder="댓글을 작성하세요">
+                    <button th:data-post-id="${post.id}" class="sendComment btn btn-info" type="button" ><i class="bi bi-send"></i></button>
                 </div>
 
             </div>
@@ -73,9 +74,39 @@
     </section>
 
 <script layout:fragment="script">
+
+    $(".like-btn").on("click", function(){
+        let postId = $(this).data("post-id");
+
+        $.ajax({
+            type:"post"
+            , url:"/post/like"
+            , data:{"postId": postId}
+            , success: function(response){
+
+                if(response.result == "success"){
+                    location.reload();
+                }else{
+                    alert("좋아요 실패!!");
+                }
+
+            }
+            , error: function(){
+                alert("좋아요 에러!!");
+            }
+
+        });
+    });
+
+
     $(".sendComment").on("click", function(){
-        let postId = $(this).val();
-        let comment = $("#commentInput").val();
+        let postId = $(this).data("post-id");
+        // 부모 div 찾기 div 의 특정값이 들어가 있으니 그걸로 찾기
+        let parentDiv = $(this).closest(".input-group");
+
+        let comment = parentDiv.find(".comment-input").val();
+
+        console.log(comment);
 
         $.ajax({
             type:"get"
@@ -85,6 +116,7 @@
 
                 if(response.result == "success"){
                     location.reload();
+
                 }else{
                     alert("댓글 작성 실패!!");
                 }

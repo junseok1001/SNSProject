@@ -1,6 +1,8 @@
 package com.sourjelly.snsproject.main;
 
 
+import com.sourjelly.snsproject.comment.dto.CommentDto;
+import com.sourjelly.snsproject.comment.service.CommentService;
 import com.sourjelly.snsproject.main.domain.Post;
 import com.sourjelly.snsproject.main.dto.PostDto;
 import com.sourjelly.snsproject.main.service.MainService;
@@ -16,9 +18,11 @@ import java.util.List;
 public class MainController {
 
     private final MainService mainService;
+    private final CommentService commentService;
 
-    public MainController(MainService mainService){
+    public MainController(MainService mainService, CommentService commentService ){
         this.mainService = mainService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/list")
@@ -26,8 +30,10 @@ public class MainController {
 
         List<PostDto> postDtoList = mainService.PostList();
 
-        model.addAttribute("posts", postDtoList);
 
+
+        model.addAttribute("posts", postDtoList);
+        
 
 
         return "main/list";

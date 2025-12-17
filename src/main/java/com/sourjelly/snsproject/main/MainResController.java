@@ -43,26 +43,6 @@ public class MainResController {
 
     }
 
-    // 댓글저장 저장
-    @GetMapping("/comment-add")
-    public Map<String, String> addComment(
-            @RequestParam String comment
-            , @RequestParam long postId
-            , HttpSession session){
-
-        User user = (User)session.getAttribute("user");
-
-        long userId = user.getId();
-
-        Map<String, String> result = new HashMap<>();
-        if(mainService.createComment(postId, userId, comment)){
-            result.put("result", "success");
-        }else{
-            result.put("result", "fail");
-        }
-
-        return result;
-    }
 
 
 
