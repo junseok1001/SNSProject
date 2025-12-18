@@ -35,7 +35,8 @@ public class LikeService {
         return likeRepository.countByPostId(postId);
     }
 
-    public int countByUserIdAndPostId(long userId, long postId){
-        return likeRepository.countByUserIdAndPostId(userId, postId);
+    public boolean isLikeByPostIdAndUserId(long userId, long postId){
+
+        return likeRepository.existsByUserIdAndPostId(userId, postId);
     }
 }

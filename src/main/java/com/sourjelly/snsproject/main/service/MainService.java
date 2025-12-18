@@ -1,6 +1,8 @@
 package com.sourjelly.snsproject.main.service;
 
 import com.sourjelly.snsproject.comment.domain.Comment;
+import com.sourjelly.snsproject.comment.dto.CommentDto;
+import com.sourjelly.snsproject.comment.service.CommentService;
 import com.sourjelly.snsproject.common.FileManger;
 import com.sourjelly.snsproject.comment.repository.CommentRepository;
 import com.sourjelly.snsproject.like.service.LikeService;
@@ -29,7 +31,7 @@ public class MainService {
 
     private final UserService userService;
 
-    private final CommentRepository commentRepository;
+    private final CommentService commentService;
 
     private final LikeService likeService;
 
@@ -61,9 +63,8 @@ public class MainService {
 
 
 //     게시물 전체정보 가져오기
-    public List<PostDto> PostList(HttpSession session){
+    public List<PostDto> PostList(long userId){
 
-        User loginUser = (User)session.getAttribute("user");
         List<Post> postList = mainRepository.findAll(Sort.by("id").descending());
 
         List<PostDto> postDtoList = new ArrayList<>();
@@ -74,11 +75,9 @@ public class MainService {
             User user = userService.getUserById(post.getUserId());
             int likeCount = likeService.countByPostId(post.getId());
 
-            List<Comment> comments = commentRepository.findByPostId(post.getId());
-            boolean judge = false;
-            if(likeService.countByUserIdAndPostId(loginUser.getId(), post.getId()) >= 1){
-                judge = true;
-            }
+            boolean isLike =likeService.isLikeByPostIdAndUserId(userId, post.getId());
+
+            List<CommentDto> commentDtoList = commentService.getCommentsByPostId(post.getId());
 
             PostDto postDto = PostDto.builder()
                     .id(post.getId())
@@ -87,7 +86,8 @@ public class MainService {
                     .userId(post.getUserId())
                     .name(user.getName())
                     .likeCount(likeCount)
-                    .isLike(judge)
+                    .isLike(isLike)
+                    .commentList(commentDtoList)
                     .build();
             postDtoList.add(postDto);
 

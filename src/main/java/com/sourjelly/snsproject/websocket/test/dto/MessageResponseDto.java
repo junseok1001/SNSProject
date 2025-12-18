@@ -12,5 +12,7 @@ import lombok.Setter;
 @Setter
 public class MessageResponseDto {
 
+
+    private String userId;
     private String content;
 }

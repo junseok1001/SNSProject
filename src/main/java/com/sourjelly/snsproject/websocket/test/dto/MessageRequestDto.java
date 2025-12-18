@@ -11,5 +11,6 @@ import lombok.Setter;
 @Setter
 public class MessageRequestDto {
 
+    private String userId;
     private String content;
 }
