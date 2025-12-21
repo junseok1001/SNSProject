@@ -12,6 +12,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequiredArgsConstructor
 @Controller
 public class ChatController {
 
@@ -24,16 +25,17 @@ public class ChatController {
         return "websocketExample/example";
     }
 
-
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
     @MessageMapping("/chat")
-    @SendTo("/topic/chat")
-    public MessageResponseDto sendMessage(MessageRequestDto requestDto){
+//    @SendTo("/topic/chat")
+    public void sendMessage(MessageRequestDto requestDto){
 
-        MessageResponseDto responseDto = new MessageResponseDto();
-        responseDto.setUserId(requestDto.getUserId());
-        responseDto.setContent(requestDto.getContent());
-        return responseDto;
+//        MessageResponseDto responseDto = new MessageResponseDto();
+//        responseDto.setUserId(requestDto.getUserId());
+//        responseDto.setContent(requestDto.getContent());
+//        return responseDto;
+        simpMessagingTemplate.convertAndSend("/topic" + "/chat", requestDto);
 
     }
 }

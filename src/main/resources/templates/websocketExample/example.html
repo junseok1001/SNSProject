@@ -12,7 +12,10 @@
 <div class="container bg-info">
     <h2>webSocket 예제</h2>
 
-    <button id="connectWebsocket" type="button" class="btn btn-secondary">websocket 연결하기</button>
+    <div>
+        <button id="connectWebsocket" type="button" class="btn btn-secondary">websocket 연결하기</button>
+        <button id="disconnectWebsocket" type="button" class="btn btn-secondary">websocket 연결 끊기</button>
+    </div>
 
     <br><label>메세지 입력 : </label><input id="sendInput" class="mx-3" type="text"><button id="sendBtn" type="button">보내기</button>
     <div id="status"> 연결 관리 : <span id="showConnection"></span></div>
@@ -81,6 +84,15 @@
         stompClient.send("/app/chat", {}, JSON.stringify(data));
         $("#sendInput").val('');
     }
+
+    function disconnect (){
+        stompClient.disconnect(function(){
+            $("#showConnection").text("연결끊김");
+        }, {});
+    }
+    $("#disconnectWebsocket").on("click", disconnect);
+    console.log(disconnect);
+
 </script>
 </body>
 </html>
