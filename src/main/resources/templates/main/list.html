@@ -67,7 +67,7 @@
                 <!-- /댓글 부분 -->
                 <!-- 댓글 작성 -->
                 <div class="input-group mb-3 container mt-3">
-                    <input  type="text" class="comment-input form-control" placeholder="댓글을 작성하세요">
+                    <input th:id="|commentInput${post.id}|"  type="text" class="comment-input form-control" placeholder="댓글을 작성하세요">
                     <button th:data-post-id="${post.id}" class="send-comment btn btn-info" type="button" ><i class="bi bi-send"></i></button>
                 </div>
 
@@ -104,9 +104,12 @@
     $(".send-comment").on("click", function(){
         let postId = $(this).data("post-id");
         // 부모 div 찾기 div 의 특정값이 들어가 있으니 그걸로 찾기
-        let parentDiv = $(this).closest(".input-group");
+        // let parentDiv = $(this).closest(".input-group");
 
-        let comment = parentDiv.find(".comment-input").val();
+        // let comment = parentDiv.find(".comment-input").val();
+        // let comment = $(this).parents().prev().val();
+
+        let comment = $("#commentInput" + postId).val();
 
         console.log(comment);
 
