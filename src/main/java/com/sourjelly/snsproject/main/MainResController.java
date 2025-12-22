@@ -39,10 +39,23 @@ public class MainResController {
         }
 
         return resultMap;
-
     }
 
 
+    @DeleteMapping("/remove")
+    public Map<String, String> removePost(
+            @RequestParam long id){
+
+        Map<String, String> resultMap = new HashMap<>();
+        if(mainService.removePost(id)){
+            resultMap.put("result", "success");
+        }else{
+            resultMap.put("result", "fail");
+        }
+
+        return resultMap;
+
+    }
 
 
 }

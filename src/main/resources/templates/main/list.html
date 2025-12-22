@@ -38,14 +38,13 @@
                     </div>
 
 
-                    <div class="dropdown mr-4">
+                    <div class="dropdown mr-4" th:if="${post.userId == session.user.id}">
                         <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical h2"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">삭제하기</a>
-                            <a class="dropdown-item" href="#">게시물로 이동</a>
-                            <a class="dropdown-item" href="#">취소</a>
+                            <button th:data-id="${post.id}" type="button" class="remove-btn dropdown-item">삭제하기</button>
+                            <a class="dropdown-item" th:href="|/main/modify?id=${post.id}|">게시물 수정</a>
                         </div>
                     </div>
                 </div>
@@ -76,6 +75,52 @@
     </section>
 
 <script layout:fragment="script">
+
+    $(".remove-btn").on("click", function(){
+        let id = $(this).data("id");
+
+        $.ajax({
+            type:"delete"
+            , url: "/post/remove"
+            , data:{"id":id}
+            , success: function(response){
+
+                if(response.result === "success"){
+                    location.href="/main/list";
+                }else{
+                    alert("삭제 실패");
+                }
+
+            }
+            , error: function(){
+                alert("삭제 에러!!");
+            }
+
+        });
+
+    });
+
+    $(".unlike-btn").on("click", function(){
+        let postId = $(this).data("post-id");
+
+        $.ajax({
+            type:"post"
+            , url:"/post/unlike"
+            , data:{"postId":postId}
+            , success: function(response){
+
+                if(response.result === "success"){
+                    location.reload();
+                }else{
+                    alert("좋아요 취소 실패!!");
+                }
+            }
+            , error: function(){
+                alert("좋아요 취소 에러!!");
+            }
+
+        });
+    });
 
     $(".like-btn").on("click", function(){
         let postId = $(this).data("post-id");

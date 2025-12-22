@@ -1,7 +1,6 @@
 package com.sourjelly.snsproject.main.dto;
 
 
-import com.sourjelly.snsproject.comment.domain.Comment;
 import com.sourjelly.snsproject.comment.dto.CommentDto;
 import lombok.Builder;
 import lombok.Getter;

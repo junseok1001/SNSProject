@@ -2,15 +2,14 @@ package com.sourjelly.snsproject.main;
 
 
 import com.sourjelly.snsproject.comment.service.CommentService;
+import com.sourjelly.snsproject.main.domain.Post;
 import com.sourjelly.snsproject.main.dto.PostDto;
 import com.sourjelly.snsproject.main.service.MainService;
 import com.sourjelly.snsproject.user.domain.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,9 +42,21 @@ public class MainController {
         return "main/list";
     }
 
-    @PostMapping("/add")
+    @GetMapping("/add")
     public String formInput(){
         return "main/form";
+    }
+
+    @GetMapping("/modify")
+    public String modify(
+            @RequestParam long id
+            , Model model){
+
+        Post post = mainService.modifyPost(id);
+
+        model.addAttribute("post", post);
+
+        return "main/modify";
     }
 
 }

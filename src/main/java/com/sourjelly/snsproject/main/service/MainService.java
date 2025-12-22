@@ -13,6 +13,7 @@ import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor // 필수 멤버 변수 를 생성자를 통해서 대응
@@ -93,6 +95,43 @@ public class MainService {
 
         }
         return postDtoList;
+    }
+    // post 하나의 수정내용
+    public Post modifyPost(long postId){
+
+        Optional<Post> optionalPost = mainRepository.findById(postId);
+
+        if(optionalPost.isPresent()){
+            return optionalPost.get();
+
+        }else{
+            return null;
+        }
+    }
+
+    public  boolean removePost(long id){
+
+        Optional<Post> optionalPost =  mainRepository.findById(id);
+
+        if(optionalPost.isPresent()){
+
+            Post post = optionalPost.get();
+
+            FileManger.removeFile(post.getImagePath());
+
+
+            try{
+                mainRepository.delete(post);
+            }catch(DataAccessException e){
+                return false;
+            }
+
+            return true;
+        }else{
+            return false;
+        }
+
+
     }
 
 

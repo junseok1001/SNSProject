@@ -39,6 +39,23 @@ public class LikeRestController {
         return resultMap;
     }
 
+    @PostMapping("/post/unlike")
+    public Map<String, String> unlike(
+            @RequestParam long postId
+            , HttpSession session){
+
+
+        User user = (User)session.getAttribute("user");
+        Map<String, String> resultMap = new HashMap<>();
+        if(likeService.removeLike(user.getId(), postId)){
+            resultMap.put("result", "success");
+        }else{
+            resultMap.put("result", "fail");
+        }
+
+        return resultMap;
+    }
+
 }
 
 

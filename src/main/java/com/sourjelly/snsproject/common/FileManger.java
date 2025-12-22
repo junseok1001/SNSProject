@@ -46,7 +46,33 @@ public class FileManger {
 
 
         return "/images" + directoryName + "/" + file.getOriginalFilename();
+    }
+
+
+    public static boolean removeFile(String imagePath){
+        // image넣는게 필수가 아니여서
+        // image 경로가 null 이라면 false 기능수행 정지
+        if(imagePath == null){
+            return false;
+        }
+
+        String fullFilePath = FILE_UPLOAD_PATH + imagePath.replace("/images", "");
+
+        Path path = Paths.get(fullFilePath);
+        Path directoryPath = path.getParent();
+
+        try {
+            Files.delete(path);
+            Files.delete(directoryPath);
+        } catch (IOException e) {
+            return false;
+        }
+
+        return true;
 
 
     }
+
+
+
 }
