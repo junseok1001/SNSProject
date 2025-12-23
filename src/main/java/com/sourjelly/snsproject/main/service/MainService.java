@@ -12,6 +12,7 @@ import com.sourjelly.snsproject.main.dto.PostDto;
 import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -109,19 +110,28 @@ public class MainService {
         }
     }
 
-    public  boolean removePost(long id){
+    @Transactional
+    public  boolean removePost(long id, long userId){
 
         Optional<Post> optionalPost =  mainRepository.findById(id);
 
         if(optionalPost.isPresent()){
 
-            Post post = optionalPost.get();
-
-            FileManger.removeFile(post.getImagePath());
-
-
             try{
+
+                Post post = optionalPost.get();
+
+                if(post.getUserId() != userId){
+                    return false;
+                }
+
+                commentService.deleteCommentByPostId(post.getId());
+
+                likeService.deleteLikeByPostId(post.getId());
+
                 mainRepository.delete(post);
+
+                FileManger.removeFile(post.getImagePath());
             }catch(DataAccessException e){
                 return false;
             }

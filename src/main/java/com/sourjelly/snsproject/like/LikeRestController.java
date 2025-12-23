@@ -47,7 +47,7 @@ public class LikeRestController {
 
         User user = (User)session.getAttribute("user");
         Map<String, String> resultMap = new HashMap<>();
-        if(likeService.removeLike(user.getId(), postId)){
+        if(likeService.deleteLike(user.getId(), postId)){
             resultMap.put("result", "success");
         }else{
             resultMap.put("result", "fail");

@@ -1,7 +1,9 @@
 package com.sourjelly.snsproject.like.service;
 
 import com.sourjelly.snsproject.like.domain.Like;
+import com.sourjelly.snsproject.like.domain.LikeId;
 import com.sourjelly.snsproject.like.repository.LikeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -42,18 +44,45 @@ public class LikeService {
         return likeRepository.existsByUserIdAndPostId(userId, postId);
     }
 
-    public boolean removeLike(long userId, long postId){
+    public boolean deleteLike(long userId, long postId) {
 
-        Like like = likeRepository.findByUserIdAndPostId(userId, postId);
+        LikeId likeId = LikeId.builder()
+                .userId(userId)
+                .postId(postId)
+                .build();
+        Optional<Like> optionalLike = likeRepository.findById(likeId);
 
-        if(like != null){
+        if (optionalLike.isPresent()) {
 
-            likeRepository.delete(like);
+            try {
+                likeRepository.delete(optionalLike.get());
+            } catch (DataAccessException e) {
+                return false;
+            }
 
-        }else{
+        } else {
             return false;
         }
 
         return true;
+    }
+//        Like like = likeRepository.findByUserIdAndPostId(userId, postId);
+
+//        if(like != null){
+//
+//            likeRepository.delete(like);
+//
+//        }else{
+//            return false;
+//        }
+//
+//        return true;
+//    }
+
+    // 게시글 삭제하면서 좋아요 목록들 전체 삭제
+    public void deleteLikeByPostId(long postId){
+
+        likeRepository.deleteByPostId(postId);
+
     }
 }

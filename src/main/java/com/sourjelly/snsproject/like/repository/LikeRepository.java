@@ -16,7 +16,10 @@ public interface LikeRepository extends JpaRepository<Like, LikeId> {
     // 존재여부를 확인해주는 쿼리도 있음
     public boolean existsByUserIdAndPostId(long userId, long postId);
 
-    public Like findByUserIdAndPostId(long userId, long postId);
+//    public Like findByUserIdAndPostId(long userId, long postId);
 
+
+    // DELETE FROM `like` WHERE `post_id` = #{};
+    public void deleteByPostId(long postId);
 }
 

@@ -6,6 +6,7 @@ import com.sourjelly.snsproject.comment.dto.CommentDto;
 import com.sourjelly.snsproject.comment.repository.CommentRepository;
 import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class CommentService {
 
         return true;
     }
-
+    // 해당 게시글 댓글정보들 모아오기
     public List<CommentDto> getCommentsByPostId(long postId){
 
         List<Comment> commentList = commentRepository.findByPostId(postId);
@@ -57,6 +58,10 @@ public class CommentService {
             commentDtoList.add(commentDto);
         }
         return commentDtoList;
+    }
+    // 해당 게시글 댓글 전체 삭제
+    public void deleteCommentByPostId(long postId){
+        commentRepository.deleteByPostId(postId);
     }
 
 }

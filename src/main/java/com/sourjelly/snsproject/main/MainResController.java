@@ -44,10 +44,13 @@ public class MainResController {
 
     @DeleteMapping("/remove")
     public Map<String, String> removePost(
-            @RequestParam long id){
+            @RequestParam long id
+            , HttpSession session){
+
+        User user = (User)session.getAttribute("user");
 
         Map<String, String> resultMap = new HashMap<>();
-        if(mainService.removePost(id)){
+        if(mainService.removePost(id, user.getId())){
             resultMap.put("result", "success");
         }else{
             resultMap.put("result", "fail");

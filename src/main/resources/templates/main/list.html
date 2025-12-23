@@ -43,13 +43,17 @@
                             <i class="bi bi-three-dots-vertical h2"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <button th:data-id="${post.id}" type="button" class="remove-btn dropdown-item">삭제하기</button>
+                            <a th:data-post-id="${post.id}" data-toggle="modal" data-target="#exampleModalCenter" class="remove-link dropdown-item">삭제하기</a>
                             <a class="dropdown-item" th:href="|/main/modify?id=${post.id}|">게시물 수정</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="hastag-area ml-4">
+
+                <div class="author ml-4">
+                    <div th:text="${post.contents}"></div>
+                </div>
+                <div class="hastag-area mt-2 ml-4">
                     #오늘의 커피한잔. #따뜻한거 먹자 #카페인 중독
                 </div>
 
@@ -72,21 +76,40 @@
 
             </div>
         </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button  type="button" class="btn btn-secondary remove-btn">삭제하기</button>
+                </div>
+            </div>
+        </div>
+
+
     </section>
 
 <script layout:fragment="script">
 
+    $(".remove-link").on("click", function(){
+        let postId = $(this).data("post-id");
+
+        $(".remove-btn").data("post-id", postId);
+    });
+
     $(".remove-btn").on("click", function(){
-        let id = $(this).data("id");
+        let postId = $(this).data("post-id");
+
 
         $.ajax({
             type:"delete"
             , url: "/post/remove"
-            , data:{"id":id}
+            , data:{"id":postId}
             , success: function(response){
 
                 if(response.result === "success"){
-                    location.href="/main/list";
+                    location.reload();
                 }else{
                     alert("삭제 실패");
                 }
