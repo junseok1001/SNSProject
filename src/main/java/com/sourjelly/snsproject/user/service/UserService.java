@@ -5,6 +5,8 @@ import com.sourjelly.snsproject.user.domain.User;
 import com.sourjelly.snsproject.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -49,5 +51,10 @@ public class UserService {
     // post에서 쓸 사용자의 정보 가져오기
     public User getUserById(long id){
         return userRepository.selectUserById(id);
+    }
+
+    public List<User> findAllUser(){
+
+        return userRepository.selectAll();
     }
 }

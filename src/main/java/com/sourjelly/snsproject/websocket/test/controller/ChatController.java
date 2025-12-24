@@ -20,8 +20,6 @@ public class ChatController {
 
     @RequestMapping("/websocket")
     public String webSocket(){
-
-
         return "websocketExample/example";
     }
 
@@ -35,7 +33,7 @@ public class ChatController {
 //        responseDto.setUserId(requestDto.getUserId());
 //        responseDto.setContent(requestDto.getContent());
 //        return responseDto;
-        simpMessagingTemplate.convertAndSend("/topic" + "/chat", requestDto);
+        simpMessagingTemplate.convertAndSend("/topic" + "/1", requestDto);
 
     }
 }

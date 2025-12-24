@@ -4,6 +4,8 @@ import com.sourjelly.snsproject.user.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserRepository {
 
@@ -21,6 +23,8 @@ public interface UserRepository {
 
 
     public User selectUserById(@Param("id") long id);
+
+    public List<User> selectAll();
 
 
 

@@ -19,7 +19,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry){
         registry.addEndpoint( "/ws").setAllowedOriginPatterns("*").withSockJS();
     }
-
+    // 결론 기서 chatroom 정보까지 다 들어가야 함.
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry){
         registry.enableSimpleBroker("/topic");

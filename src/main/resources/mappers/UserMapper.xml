@@ -66,4 +66,19 @@
             `id` = #{id}
     </select>
 
+    <select id="selectAll"
+    resultType="com.sourjelly.snsproject.user.domain.User">
+        SELECT
+            `id`
+             , `login_id`
+             , `password`
+             , `name`
+             , `phone_number`
+             , `email`
+             , `created_at`
+             , `updated_at`
+        FROM
+            `user`
+    </select>
+
 </mapper>

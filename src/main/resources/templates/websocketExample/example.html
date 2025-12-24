@@ -46,7 +46,7 @@
         stompClient.connect({}, function () {
                 $("#showConnection").text("연결완료");
                 //subscribe(subscribe url,해당 url로 메시지를 받을때마다 실행할 함수)
-                sub = stompClient.subscribe("/topic/chat", function (e) {
+                sub = stompClient.subscribe("/topic/1", function (e) {
                     //e.body에 전송된 data가 들어있다
                     showMessage(JSON.parse(e .body));
                 });
@@ -62,6 +62,7 @@
 
     //엔터 눌렀을때 전송
     $("#sendBtn").on("click",function(e){
+        e.preventDefault();
          send();
     });
 

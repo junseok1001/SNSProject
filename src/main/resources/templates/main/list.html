@@ -77,6 +77,11 @@
             </div>
         </div>
 
+        <div>
+            <a href="/message" id="moveToMessage" class="btn btn-secondary">메세지 페이지 이동</a>
+        </div>
+
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -91,6 +96,9 @@
     </section>
 
 <script layout:fragment="script">
+
+
+
 
     $(".remove-link").on("click", function(){
         let postId = $(this).data("post-id");
