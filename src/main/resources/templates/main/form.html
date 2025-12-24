@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/timeline}">
+
+
+    <section layout:fragment="contents">
+        <div class="contents p-3">
+            <div class="d-flex justify-content-center">
+            <input id="titleInput" class="form-control text-center mt-3 col-10" tpye="text" placeholder="제목을 입력하세요">
+            </div>
+            <label class="mt-3 font-weight-bold">내용을 입력하세요</label>
+            <textarea id="contentInput" class="form-control" rows="20" cols="128"> </textarea>
+            <div>
+                <input id="fileInput" class="form-control mt-3" type="file">
+                <i id="imageInput" class="form-control bi bi-image-fill mt-3"></i>
+            </div>
+
+            <div class="d-flex justify-content-end mt-3">
+                <button id="formInput" class="btn btn-success mr-2" type="button">작성하기</button>
+                <a class="btn btn-danger" href="/main/list" type="">취소</a>
+            </div>
+        </div>
+    </section>
+
+
+<script layout:fragment="script">
+
+    $("#imageInput").on("click", function(){
+        $("#fileInput").click();
+    });
+
+
+    $("#formInput").on("click", function(){
+        let title = $("#titleInput").val();
+        let content = $("#contentInput").val();
+        let file = $("#fileInput")[0].files[0];
+
+
+        if(title==""){
+            alert("제목을 입력하세요");
+            return;
+        }
+
+        if(content == ""){
+            alert("내용을 입력하세요");
+            return;
+        }
+
+        if(file == null){
+            alert("이미지를 선택하세요");
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append("title", title);
+        formData.append("contents", content);
+        formData.append("imageFile", file);
+
+        $.ajax({
+            type:"post"
+            , url:"/post/add-process"
+            , data: formData
+            , processData: false
+            , contentType: false
+            , success: function(response){
+
+                if(response.result == "success"){
+                    location.href="/main/list"
+                }else{
+                    alert("게시물 작성 실패");
+                }
+
+            }
+            ,error : function(){
+                alert("게시물 작성 에러");
+            }
+        });
+
+    });
+
+</script>
+
+</html>

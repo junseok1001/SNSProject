@@ -5,63 +5,209 @@
       layout:decorate="~{/layout/timeline}">
 
 
-    <section layout:fragment="contents" class="contents d-flex align-items-center" >
-        <div class="user-box my-3">
-            <!--상단-->
-            <div class="profile-info w-100 d-flex align-items-center justify-content-between ml-4 mt-3">
-                <div class="d-flex">
-                    <i class="bi bi-person-circle h1"></i>
-                <div>user-name</div>
-                </div>
-                <div class="search-box d-flex w-100 ml-3">
-                    <input class="form-control col-10 search-input-form" type="text" placeholder="검색">
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="search-button btn "><img width="25" height="25" src="data:image/png;base64,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"></button>
+    <section layout:fragment="contents" >
+        <div th:each="post : ${posts}" class="d-flex contents align-items-center my-1" >
+            <div class="user-box my-3">
+                <!--상단-->
+                <div class="profile-info w-100 d-flex align-items-center justify-content-between ml-4 mt-3">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-person-circle h1"></i>
+                    <div class="text-small" th:text="${post.name}">user-name</div>
+                    </div>
+                    <div class="search-box d-flex w-75 ml-3">
+                        <input class="form-control col-10 search-input-form" type="text" placeholder="검색">
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="search-button btn "><img width="25" height="25" src="data:image/png;base64,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"></button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--중단 이미지-->
-            <div class="image-area d-flex justify-content-center">
-                <img class="time-line-image" width="700" height="450" src="https://cdn.pixabay.com/photo/2017/09/04/18/39/coffee-2714970_640.jpg">
-            </div>
-
-            <!-- 하트랑 목록-->
-            <div class="heart-list-area d-flex justify-content-between">
-                <div class="d-flex align-items-center ml-4">
-                    <button type="button" class="btn p-1"><i class="bi bi-heart-fill hover text-danger"></i></button>
-                    <div class="font-weight-bold">좋아요 갯수 : <span>5</span></div>
+                <!--중단 이미지-->
+                <div class="image-area d-flex justify-content-center">
+                    <img class="time-line-image"  width="700" height="450" th:src="${post.imagePath}" src="https://cdn.pixabay.com/photo/2017/09/04/18/39/coffee-2714970_640.jpg">
                 </div>
 
+                <!-- 하트랑 목록-->
+                <div class="heart-list-area d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div th:data-judge-heart="${post.isLike()}" class="heart d-flex align-items-center ml-4" >
+                            <i th:if="${post.isLike}" class="unlike-btn bi bi-heart-fill text-danger" th:data-post-id="${post.id}"></i>
+                            <i th:unless="${post.isLike}" class="like-btn bi bi-heart" th:data-post-id="${post.id}"></i>
+                        </div>
+                        <div class="font-weight-bold ml-2">좋아요 <span th:text="${post.likeCount}">5</span></div>
+                    </div>
 
-                <div class="dropdown mr-4">
-                    <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-three-dots-vertical h2"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">삭제하기</a>
-                        <a class="dropdown-item" href="#">게시물로 이동</a>
-                        <a class="dropdown-item" href="#">취소</a>
+
+                    <div class="dropdown mr-4" th:if="${post.userId == session.user.id}">
+                        <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical h2"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a th:data-post-id="${post.id}" data-toggle="modal" data-target="#exampleModalCenter" class="remove-link dropdown-item">삭제하기</a>
+                            <a class="dropdown-item" th:href="|/main/modify?id=${post.id}|">게시물 수정</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="hastag-area ml-4">
-                #오늘의 커피한잔. #따뜻한거 먹자 #카페인 중독
-            </div>
 
-            <div class="comment-area ml-4">
-                <div class="d-flex align-items-top">
-                    <i class="bi bi-person-circle h4"></i>
-                    <div>user-name</div>
+                <div class="author ml-4">
+                    <div th:text="${post.contents}"></div>
                 </div>
-                <div class="comment-box "><p class="ml-3 text-wrap">분위가가 좋네요</p></div>
-            </div>
+                <div class="hastag-area mt-2 ml-4">
+                    #오늘의 커피한잔. #따뜻한거 먹자 #카페인 중독
+                </div>
 
+                <hr>
+
+                <!-- 댓글 부분 -->
+                <div   class="comment-area ml-4 ">
+                    <div th:each="comment : ${post.commentList}" class="comment-box d-flex align-items-center ">
+                        <div><b th:text="${comment.name}" >user-name</b></div>
+                        <p th:text="${comment.comment}"  class="ml-3 my-2 text-wrap">분위가가 좋네요</p>
+                    </div>
+                </div>
+
+                <!-- /댓글 부분 -->
+                <!-- 댓글 작성 -->
+                <div class="input-group mb-3 container mt-3">
+                    <input th:id="|commentInput${post.id}|"  type="text" class="comment-input form-control" placeholder="댓글을 작성하세요">
+                    <button th:data-post-id="${post.id}" class="send-comment btn btn-info" type="button" ><i class="bi bi-send"></i></button>
+                </div>
+
+            </div>
         </div>
+
+        <div>
+            <a href="/message" id="moveToMessage" class="btn btn-secondary">메세지 페이지 이동</a>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button  type="button" class="btn btn-secondary remove-btn">삭제하기</button>
+                </div>
+            </div>
+        </div>
+
+
     </section>
 
 <script layout:fragment="script">
+
+
+
+
+    $(".remove-link").on("click", function(){
+        let postId = $(this).data("post-id");
+
+        $(".remove-btn").data("post-id", postId);
+    });
+
+    $(".remove-btn").on("click", function(){
+        let postId = $(this).data("post-id");
+
+
+        $.ajax({
+            type:"delete"
+            , url: "/post/remove"
+            , data:{"id":postId}
+            , success: function(response){
+
+                if(response.result === "success"){
+                    location.reload();
+                }else{
+                    alert("삭제 실패");
+                }
+
+            }
+            , error: function(){
+                alert("삭제 에러!!");
+            }
+
+        });
+
+    });
+
+    $(".unlike-btn").on("click", function(){
+        let postId = $(this).data("post-id");
+
+        $.ajax({
+            type:"post"
+            , url:"/post/unlike"
+            , data:{"postId":postId}
+            , success: function(response){
+
+                if(response.result === "success"){
+                    location.reload();
+                }else{
+                    alert("좋아요 취소 실패!!");
+                }
+            }
+            , error: function(){
+                alert("좋아요 취소 에러!!");
+            }
+
+        });
+    });
+
+    $(".like-btn").on("click", function(){
+        let postId = $(this).data("post-id");
+
+        $.ajax({
+            type:"post"
+            , url:"/post/like"
+            , data:{"postId": postId}
+            , success: function(response){
+
+                if(response.result == "success"){
+                    location.reload();
+                }else{
+                    alert("좋아요 실패!!");
+                }
+
+            }
+            , error: function(){
+                alert("좋아요 에러!!");
+            }
+
+        });
+    });
+
+
+    $(".send-comment").on("click", function(){
+        let postId = $(this).data("post-id");
+        // 부모 div 찾기 div 의 특정값이 들어가 있으니 그걸로 찾기
+        // let parentDiv = $(this).closest(".input-group");
+
+        // let comment = parentDiv.find(".comment-input").val();
+        // let comment = $(this).parents().prev().val();
+
+        let comment = $("#commentInput" + postId).val();
+
+        console.log(comment);
+
+        $.ajax({
+            type:"post"
+            , url:"/post/comment-add"
+            , data:{"postId":postId, "comment":comment}
+            , success: function(response){
+
+                if(response.result == "success"){
+                    location.reload();
+
+                }else{
+                    alert("댓글 작성 실패!!");
+                }
+
+            }
+            ,error: function(){
+                alert("댓글 작성 에러!");
+            }
+        });
+    });
 
 </script>
 

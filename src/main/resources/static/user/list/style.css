@@ -12,27 +12,28 @@ header{
 
 .contents{
     width:1000px;
-    height:772px;
     margin: 0 auto;
-    background-color:#dddddd;
 }
 
 .user-box{
     width:760px;
-    height: 800px;
     margin: 0 auto;
     border-radius:30px;
     background-color:#fffefe;
+    border:1px solid black;
 }
+
 .comment-box{
     width:490px;
     height:35px;
-    border-radius:30px;
-    background-color:#dddddd;
+
+    border-bottom:1px solid black;
+
 }
 
 .profile-info{
     height:50px;
+
 }
 
 .search-input-form{

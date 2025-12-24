@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="~{/layout/timeline}">
+
+
+
+<section layout:fragment="contents">
+
+    <div class="container">
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>메세지 보내기 위한 버튼</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user:${users}"
+                    th:if="${session.user.name} != ${user.name}">
+                    <td th:text="${user.name}">사용자 이름</td>
+                    <td><button id="moveToChatRoom" type="button" class="btn btn-secondary">채팅방 이동하기</button> </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+</section>
+
+
+
+
+
+
+<script layout:fragment="script">
+
+</script>
+
+</html>
